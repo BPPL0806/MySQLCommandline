@@ -29,18 +29,20 @@ while True:
         query = input("["+username+"@"+host+"]> ")
         dbcursor.execute(query)
         result = dbcursor.fetchall()
-        print("▛▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+        print("\n====================================")
         for x in dbcursor:
-            print(f'▌{x}')
+            print(f'{x}')
         for x in result:
-            print(f'▌{x}')
-        print("▙▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n")
+            print(f'{x}')
+        print("====================================\n")
         continue
     except KeyboardInterrupt:
         print(f'\n[Disconnecting from {host}...]\n')
         exit(0)
     except mysql.connector.Error as error:
-        print("▛▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
-        print(f"▌[{error}]")
-        print("▙▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n")
+        if str(error) == "No result set to fetch from.":
+            continue
+        print("\n====================================")
+        print(f"[{error}]")
+        print("====================================\n")
         continue
